@@ -24,10 +24,10 @@ jobs:
         
     - name: Add Gitee remote
       run: |
-        git remote add gitee https://${{ secrets.GITEE_TOKEN }}@gitee.com/caiweilv/DeltaForcePrice.git
+        git remote add gitee https://e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git
         # 如果远程已存在，先删除再添加
         git remote remove gitee 2>/dev/null || true
-        git remote add gitee https://${{ secrets.GITEE_TOKEN }}@gitee.com/caiweilv/DeltaForcePrice.git
+        git remote add gitee https://e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git
         
     - name: Pull latest changes from upstream
       run: |

@@ -10,16 +10,25 @@
 
 ### 1. 在GitHub仓库中配置Secrets
 
-需要在你的GitHub仓库 (`caiweilv/DeltaForcePrice`) 中添加以下Secret：
+**注意**: `GITHUB_TOKEN` 是GitHub Actions自动提供的内置token，无需手动配置。
+
+只需要手动添加以下Secret：
 
 1. 进入GitHub仓库页面
 2. 点击 `Settings` -> `Secrets and variables` -> `Actions`
 3. 点击 `New repository secret`
 4. 添加以下Secret：
 
-#### GITEE_TOKEN
+#### GITEE_TOKEN (已配置)
 - **Name**: `GITEE_TOKEN`
-- **Value**: 你的Gitee个人访问令牌
+- **Value**: `e7bfa64a1aafad238f95cc5fe4e77ae1` (已直接写入工作流文件)
+
+#### 关于GITHUB_TOKEN
+`GITHUB_TOKEN` 是GitHub Actions自动生成的临时访问令牌，具有以下特点：
+- **自动生成**: 每次工作流运行时自动创建
+- **临时有效**: 仅在当前工作流运行期间有效
+- **权限自动**: 自动获得对当前仓库的读写权限
+- **无需配置**: 不需要在Secrets中手动添加
 
 ### 2. 获取Gitee个人访问令牌
 
