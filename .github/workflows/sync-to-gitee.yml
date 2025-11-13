@@ -52,7 +52,7 @@ jobs:
         
     - name: Push to Gitee
       run: |
-        git push https://caiweilv:${{ secrets.GITEE_TOKEN }}@gitee.com/caiweilv/DeltaForcePrice.git master --force
+        git push https://caiweilv:e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git master --force
         
     - name: Push to GitHub (keep in sync)
       run: |
