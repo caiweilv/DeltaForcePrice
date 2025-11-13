@@ -29,6 +29,10 @@ jobs:
         git remote remove gitee 2>/dev/null || true
         git remote add gitee https://e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git
         
+    - name: Add upstream remote
+      run: |
+        git remote add upstream https://github.com/orzice/DeltaForcePrice.git
+        
     - name: Pull latest changes from upstream
       run: |
         git fetch upstream
