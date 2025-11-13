@@ -32,12 +32,23 @@ jobs:
     - name: Add upstream remote
       run: |
         git remote add upstream https://github.com/orzice/DeltaForcePrice.git
+        git remote -v
+        
+    - name: Test upstream access
+      run: |
+        git ls-remote upstream
+        echo "Testing access to upstream repository..."
         
     - name: Pull latest changes from upstream
       run: |
-        git fetch upstream
-        git checkout master
-        git merge upstream/master --no-edit
+        if git fetch upstream; then
+          echo "Successfully fetched from upstream"
+          git checkout master
+          git merge upstream/master --no-edit
+        else
+          echo "Failed to fetch from upstream, using current state"
+          git checkout master
+        fi
         
     - name: Push to Gitee
       run: |
