@@ -24,24 +24,35 @@ jobs:
         
     - name: Add Gitee remote
       run: |
-        git remote add gitee https://e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git
+        git remote add gitee https://gitee.com/caiweilv/DeltaForcePrice.git
         # 如果远程已存在，先删除再添加
         git remote remove gitee 2>/dev/null || true
-        git remote add gitee https://e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git
+        git remote add gitee https://gitee.com/caiweilv/DeltaForcePrice.git
         
     - name: Add upstream remote
       run: |
         git remote add upstream https://github.com/orzice/DeltaForcePrice.git
+        git remote -v
+        
+    - name: Test upstream access
+      run: |
+        git ls-remote upstream
+        echo "Testing access to upstream repository..."
         
     - name: Pull latest changes from upstream
       run: |
-        git fetch upstream
-        git checkout master
-        git merge upstream/master --no-edit
+        if git fetch upstream; then
+          echo "Successfully fetched from upstream"
+          git checkout master
+          git merge upstream/master --no-edit
+        else
+          echo "Failed to fetch from upstream, using current state"
+          git checkout master
+        fi
         
     - name: Push to Gitee
       run: |
-        git push gitee master --force
+        git push https://caiweilv:e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git master --force
         
     - name: Push to GitHub (keep in sync)
       run: |
