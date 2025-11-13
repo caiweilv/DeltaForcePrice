@@ -3,7 +3,7 @@ name: Sync from GitHub to Gitee
 on:
   schedule:
     # 从第10分钟开始，每隔10分钟触发一次 (10,20,30,40,50,00)
-    - cron: '10,20,30,40,50,0 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch: # 允许手动触发
 
 jobs:
