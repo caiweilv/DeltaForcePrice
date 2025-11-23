@@ -1,59 +1,59 @@
-name: Sync from GitHub to Gitee
+# name: Sync from GitHub to Gitee
 
-on:
-  schedule:
-    # 从第10分钟开始，每隔10分钟触发一次 (10,20,30,40,50,00)
-    - cron: '1,11,21,31,41,51 * * * *'
-  workflow_dispatch: # 允许手动触发
+# on:
+#   schedule:
+#     # 从第10分钟开始，每隔10分钟触发一次 (10,20,30,40,50,00)
+#     - cron: '1,11,21,31,41,51 * * * *'
+#   workflow_dispatch: # 允许手动触发
 
-jobs:
-  sync:
-    runs-on: ubuntu-latest
+# jobs:
+#   sync:
+#     runs-on: ubuntu-latest
     
-    steps:
-    - name: Checkout source repository
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        fetch-depth: 0 # 获取完整历史记录
+#     steps:
+#     - name: Checkout source repository
+#       uses: actions/checkout@v4
+#       with:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#         fetch-depth: 0 # 获取完整历史记录
         
-    - name: Configure Git
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
+#     - name: Configure Git
+#       run: |
+#         git config --global user.name "GitHub Actions"
+#         git config --global user.email "actions@github.com"
         
-    - name: Add Gitee remote
-      run: |
-        git remote add gitee https://gitee.com/caiweilv/DeltaForcePrice.git
-        # 如果远程已存在，先删除再添加
-        git remote remove gitee 2>/dev/null || true
-        git remote add gitee https://gitee.com/caiweilv/DeltaForcePrice.git
+#     - name: Add Gitee remote
+#       run: |
+#         git remote add gitee https://gitee.com/caiweilv/DeltaForcePrice.git
+#         # 如果远程已存在，先删除再添加
+#         git remote remove gitee 2>/dev/null || true
+#         git remote add gitee https://gitee.com/caiweilv/DeltaForcePrice.git
         
-    - name: Add upstream remote
-      run: |
-        git remote add upstream https://github.com/orzice/DeltaForcePrice.git
-        git remote -v
+#     - name: Add upstream remote
+#       run: |
+#         git remote add upstream https://github.com/orzice/DeltaForcePrice.git
+#         git remote -v
         
-    - name: Test upstream access
-      run: |
-        git ls-remote upstream
-        echo "Testing access to upstream repository..."
+#     - name: Test upstream access
+#       run: |
+#         git ls-remote upstream
+#         echo "Testing access to upstream repository..."
         
-    - name: Pull latest changes from upstream
-      run: |
-        if git fetch upstream; then
-          echo "Successfully fetched from upstream"
-          git checkout master
-          git merge upstream/master --no-edit
-        else
-          echo "Failed to fetch from upstream, using current state"
-          git checkout master
-        fi
+#     - name: Pull latest changes from upstream
+#       run: |
+#         if git fetch upstream; then
+#           echo "Successfully fetched from upstream"
+#           git checkout master
+#           git merge upstream/master --no-edit
+#         else
+#           echo "Failed to fetch from upstream, using current state"
+#           git checkout master
+#         fi
         
-    - name: Push to Gitee
-      run: |
-        git push https://caiweilv:e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git master --force
+#     - name: Push to Gitee
+#       run: |
+#         git push https://caiweilv:e7bfa64a1aafad238f95cc5fe4e77ae1@gitee.com/caiweilv/DeltaForcePrice.git master --force
         
-    - name: Push to GitHub (keep in sync)
-      run: |
-        git push origin master
+#     - name: Push to GitHub (keep in sync)
+#       run: |
+#         git push origin master
